@@ -18,32 +18,25 @@ function isNum(str) {
 
 }
 
-function isAlpha(str) {
-  return /^[a-zA-Z]+$/.test(str);
-}
-
 var Bob = function() {};
 
 Bob.prototype.hey = function(input) {
+	var responses = ['Whatever.', 'Whoa, chill out!', 'Sure.', 'Fine. Be that way!'];
 	var input = input.trim();
 	var lastChar = input.substr(-1);
-	if ((isAlpha(lastChar) && !isUpperCase(input)) ||
-		(lastChar == ".") || 
-		(!isUpperCase(input) && lastChar == "!") || 
-		(lastChar != "?" && isNum(input)) 
-			) {
-			return 'Whatever.';
-		} else if (
-			(isAlpha(lastChar) && isUpperCase(input)) ||
-			(isUpperCase(input) && lastChar == "!") || 
-			(isUpperCase(input) && lastChar == "?" && !isNum(input)) 
-				) {
-			return 'Whoa, chill out!';
-		} else if ((lastChar == '?') || ((isNum(input)) && lastChar == '?')) {
-			return 'Sure.';
-		} else if (input == '') {
-			return 'Fine. Be that way!';
+	if (input === '') {
+		return responses[3];
+	}
+	if (lastChar === "?") {
+		if ( isNum(input) || !isUpperCase(input) ) {
+			return responses[2];
 		}
+	}
+	if ( isUpperCase(input) && !isNum(input) ) {
+		return responses[1];
+	} else {
+		return responses[0];
+	} 
 };
 
 module.exports = Bob;
