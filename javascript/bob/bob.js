@@ -21,21 +21,21 @@ function isNum(str) {
 var Bob = function() {};
 
 Bob.prototype.hey = function(input) {
-	var responses = ['Whatever.', 'Whoa, chill out!', 'Sure.', 'Fine. Be that way!'];
+	var responses = { Statement : 'Whatever.', Shouting : 'Whoa, chill out!', Question : 'Sure.', Silence : 'Fine. Be that way!' };
 	var input = input.trim();
 	var lastChar = input.substr(-1);
 	if (input === '') {
-		return responses[3];
+		return responses.Silence;
 	}
 	if (lastChar === "?") {
 		if ( isNum(input) || !isUpperCase(input) ) {
-			return responses[2];
+			return responses.Question;
 		}
 	}
 	if ( isUpperCase(input) && !isNum(input) ) {
-		return responses[1];
+		return responses.Shouting;
 	} else {
-		return responses[0];
+		return responses.Statement;
 	} 
 };
 
